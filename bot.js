@@ -9,13 +9,7 @@ Client.on('ready', () => {
 
 
 const Pool = require('pg').Pool
-const pool = new Pool({
-  user: 'process.env.USER',
-  host: 'process.env.HOST',
-  database: 'process.env.DATABASE',
-  password: 'process.env.PASS',
-  port: 5432,
-})
+const pool = new Pool(process.env.JSON)
 const getUsers = (request, response) => {
   pool.query(process.env.SQL, (error, results) => {
     if (error) {
