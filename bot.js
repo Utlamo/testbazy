@@ -1,35 +1,23 @@
 const Discord = require("discord.js");
+var mysql = require('pg');
 const Client = new Discord.Client({disableEveryone: true});
 Client.login(process.env.BOT_TOKEN);
 
 Client.on('ready', () => {
     console.log(Client.user.tag + "is online!");
-    Client.user.setPresence({ game: { name: 'Drugi Bot☺', type: 0 } });
+    Client.user.setPresence({ game: { name: 'BazaByHeroku', type: 0 } });
   });
 
-var tryb = 0;
 
-  Client.on("message", (receivedMessage) => {
-  if(receivedMessage.content.toString()=="answer") tryb = 0;
-  if(receivedMessage.content.toString()=="cichaj") tryb = 1;
   if(receivedMessage.content.toString()=="help") helpCommand(receivedMessage);
-  if(receivedMessage.content.toString()=="spam") tryb = 2;
-
-  });
-if(tryb == 0 || tryb == 2 ) odpowiedz();
-
-
-function odpowiedz(){
-  Client.on("message", (receivedMessage) => {
-    if(tryb !=2 ){
-  if(receivedMessage.author == Client.user || tryb ) return;}
-  receivedMessage.channel.send("Witaj " + receivedMessage.author + " odpowiadam: " + receivedMessage.content);
-});
-
-}
 
 
 
+Connection conn = DriverManager.getConnection(process.env.DATABASE_URL);
 
+
+
+  var sql = "CREATE TABLE tabela1 (id BIGSERIAL NOT NULL PRIMARY KEY, firstName VARCHAR(50) NOT NULL, secondName VARCHAR(50) NOT NULL, number1 VARCHAR(50) NULL, number2 VARCHAR(50) NULL UNIQUE");
+client.query(sql);
 
 function helpCommand(receivedMessage){  receivedMessage.channel.send("Aby włączyć powtarzanie wpisz \"answer\"\nAby wyłączyć powtarzanie wpisz \"cichaj\"\nAby bot zaczął spamić wpisz \"spam\"\nAby uzyskać pomoc wpisz \"help\""); }
