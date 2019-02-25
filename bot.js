@@ -8,6 +8,9 @@ Client.on('ready', () => {
   });
 
 
+Client.on("message", (receivedMessage) => {
+  if(receivedMessage.content.toString()=="sql") 
+  {
 const Pool = require('pg').Pool
 const pool = new Pool(process.env.JSON)
 const getUsers = (request, response) => {
@@ -16,14 +19,14 @@ const getUsers = (request, response) => {
       throw error
     }
     receivedMessage.channel.send(response.status(200).json(results.rows));
-  })
+  })}
 }
 
-
+ 
 
   if(receivedMessage.content.toString()=="help") helpCommand(receivedMessage);
 
-
+});
 
 Connection conn = DriverManager.getConnection(process.env.DATABASE_URL);
 
