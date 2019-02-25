@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-var mysql = require('pg');
 const Client = new Discord.Client({disableEveryone: true});
 Client.login(process.env.BOT_TOKEN);
 
@@ -7,6 +6,25 @@ Client.on('ready', () => {
     console.log(Client.user.tag + "is online!");
     Client.user.setPresence({ game: { name: 'BazaByHeroku', type: 0 } });
   });
+
+
+const Pool = require('pg').Pool
+const pool = new Pool({
+  user: 'process.env.USER',
+  host: 'process.env.HOST',
+  database: 'process.env.DATABASE',
+  password: 'process.env.PASS',
+  port: 5432,
+})
+const getUsers = (request, response) => {
+  pool.query(process.env.SQL, (error, results) => {
+    if (error) {
+      throw error
+    }
+    receivedMessage.channel.send(response.status(200).json(results.rows));
+  })
+}
+
 
 
   if(receivedMessage.content.toString()=="help") helpCommand(receivedMessage);
