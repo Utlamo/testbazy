@@ -47,13 +47,12 @@ var conString = process.env.CON_STRING;
 var client = new pg.Client(conString);
 client.connect();
 
-//queries are queued and executed one after another once the connection becomes available
+
     client.query("CREATE TABLE tabela1 (id BIGSERIAL NOT NULL PRIMARY KEY, firstName VARCHAR(50) NOT NULL, secondName VARCHAR(50) NOT NULL, number1 VARCHAR(50) NULL, number2 VARCHAR(50) NULL UNIQUE);
     client.query("INSERT INTO tabela1(firstName) values($1)", ['John', x]);
 
 wynik = client.query("SELECT * FROM tabela1");
-//fired after last row is emitted
-// //////////////////////////////////////////////////////////////////////////////////////////////
+
 query.on('row', function(row) {
     console.log(row);
 });
@@ -64,7 +63,6 @@ query.on('end', function() {
 
 
 
-//fired after last row is emitted
 query.on('end', function() {
     client.end();
 });
