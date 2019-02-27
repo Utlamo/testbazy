@@ -3,48 +3,32 @@ const Client = new Discord.Client({disableEveryone: true});
 Client.login(process.env.BOT_TOKEN);
 var pg = require('pg');
 var wynik = "";
+var conString = process.env.CON_STRING;
+var client = new pg.Client(conString);
 
 Client.on('ready', () => {
     console.log(Client.user.tag + "is online!");
-    Client.user.setPresence({ game: { name: 'Drugi Bot☺', type: 0 } });
+    Client.user.setPresence({ game: { name: 'TestBazyAktywny', type: 0 } });
   });
 
 var tryb = 0;
 
   Client.on("message", (receivedMessage) => {
     //    wyciagnij();          
-  if(receivedMessage.author == Client.user ) return;}
+  if(receivedMessage.author == Client.user ) return;
   receivedMessage.channel.send("Witaj " + receivedMessage.author + " odpowiadam: " + wynik);
 );
 
       
   });
 
-
-
-function odpowiedz(){
-  Client.on("message", (receivedMessage) => {
-    if(tryb !=2 ){
-  if(receivedMessage.author == Client.user || tryb ) return;}
-  receivedMessage.channel.send("Witaj " + receivedMessage.author + " odpowiadam: " + receivedMessage.content);
-});
-
-}
-
-
-
-
-
-function helpCommand(receivedMessage){ receivedMessage.channel.send("Aby włączyć powtarzanie wpisz \"answer\"\nAby wyłączyć powtarzanie wpisz \"cichaj\"\nAby bot zaczął spamić wpisz \"spam\"\nAby uzyskać pomoc wpisz \"help\""); }
 function helpCommand(receivedMessage){  receivedMessage.channel.send("Aby włączyć powtarzanie wpisz \"answer\"\nAby wyłączyć powtarzanie wpisz \"cichaj\"\nAby bot zaczął spamić wpisz \"spam\"\nAby uzyskać pomoc wpisz \"help\""); }
 
 
 
 
 wyciagnij(){
-var conString = process.env.CON_STRING;
 
-var client = new pg.Client(conString);
 client.connect();
 
 
