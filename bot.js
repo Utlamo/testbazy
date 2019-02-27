@@ -12,7 +12,7 @@ Client.on('ready', () => {
 var tryb = 0;
 
   Client.on("message", (receivedMessage) => {
-        wyciagnij();          
+    //    wyciagnij();          
   if(receivedMessage.author == Client.user ) return;}
   receivedMessage.channel.send("Witaj " + receivedMessage.author + " odpowiadam: " + wynik);
 );
